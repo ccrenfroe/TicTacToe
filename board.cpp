@@ -12,13 +12,13 @@ Board::Board() : board{{{' ',' ',' '},{' ',' ',' '},{' ',' ',' '}}},rows{(int) b
 // Places the players symbol onto the board at a specified sector. row and col are subtracted by 1 to account for the 0th index.
 void Board::placePiece(const Point& sector, const Player& player)
 {
-	this->board[sector.row - 1][sector.col - 1] = player.getSymbol();
+	board[sector.row - 1][sector.col - 1] = player.getSymbol();
 }
 
 // Checks if a sector is free to confirm if a players sector input is valid.
 bool Board::sectorFree(const Point& sector)
 {
-	if(this->board[sector.row - 1][sector.col - 1] == ' '){return true;}
+	if(board[sector.row - 1][sector.col - 1] == ' '){return true;}
 	return false;
 }
 
@@ -26,30 +26,30 @@ bool Board::sectorFree(const Point& sector)
 char Board::checkWinner()
 {
 	// Check verticals.
-	for(int i=0; i < this->rows; i++)
+	for(int i=0; i < rows; i++)
 	{
-		if(this->board[i][0] == this->board[i][1] and 
-		   this->board[i][1] == this->board[i][2] and 
-		   this->board[i][0] != ' ')
+		if(board[i][0] == board[i][1] and 
+		   board[i][1] == board[i][2] and 
+		   board[i][0] != ' ')
 		{return this->board[i][0];}
 	}
 	// Check horizontals.
 	for(int i=0; i < this->cols; i++)
 	{
-		if(this->board[0][i] == this->board[1][i] and
-		   this->board[1][i] == this->board[2][i] and
-		   this->board[0][i] != ' ')
-		{return this->board[0][i];}
+		if(board[0][i] == board[1][i] and
+		   board[1][i] == board[2][i] and
+		   board[0][i] != ' ')
+		{return board[0][i];}
 	}
 	// Check diagonals.
-	if(this->board[0][0] == this->board[1][1] and
-	   this->board[1][1] == this->board[2][2] and
-	   this->board[0][0] !=' ')
-	{return this->board[0][0];}
-	if(this->board[2][0] == this->board[1][1] and
-	   this->board[1][1] == this->board[0][2] and 
-	   this->board[2][0] !=' ')
-	{return this->board[2][0];}
+	if(board[0][0] == board[1][1] and
+	   board[1][1] == board[2][2] and
+	   board[0][0] !=' ')
+	{return board[0][0];}
+	if(board[2][0] == board[1][1] and
+	   board[1][1] == board[0][2] and 
+	   board[2][0] !=' ')
+	{return board[2][0];}
 	return ' '; // AKA no winner.
 }
 

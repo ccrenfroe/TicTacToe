@@ -18,42 +18,42 @@ Game::Game(Board& gameboard, Player& player1, Player& player2) :
 void Game::printGame()
 {
 	std::string currGameState;
-	if (this->currentState == Gamestate::player1)
+	if (currentState == Gamestate::player1)
 	{
-		currGameState = this->p1.getName() + "\'s turn\n";
+		currGameState = p1.getName() + "\'s turn\n";
 	}
 	else // (this->currentState == Gamestate::player2)
 	{
-		currGameState = this->p2.getName() + "\'s turn\n";
+		currGameState = p2.getName() + "\'s turn\n";
 	}
 	std::cout << "================================\n";
-	std::cout << currGameState << "\n" << this->gb;
+	std::cout << currGameState << "\n" << gb;
 	std::cout << "================================\n";
 }
 
 
 void Game::updateGameState()
 {
-	char winner = this->gb.checkWinner();
+	char winner = gb.checkWinner();
 	if(winner == ' ') // AKA no winner.
 	{
 		// Tie logic.
-		if(this->currMoves == this->maxMoves)
+		if(currMoves == maxMoves)
 		{
-			this->currentState = Gamestate::tieGame;
+			currentState = Gamestate::tieGame;
 			std::cout << "Tie game!\n";
 			exit(0);
 		}
 		else // swap state to the next player.
 		{	
-			this->currMoves++;
-			if(this->currentState == Gamestate::player1){this->currentState = Gamestate::player2;}
-			else{this->currentState = Gamestate::player1;}
+			currMoves++;
+			if(currentState == Gamestate::player1){currentState = Gamestate::player2;}
+			else{currentState = Gamestate::player1;}
 		}
 	}
 	else // Winner logic.
 	{
-		this->currentState = Gamestate::winner;
+		currentState = Gamestate::winner;
 		std::cout << winner << "'s win!\n";
 		exit(0);
 	}
@@ -80,22 +80,22 @@ void Game::playerTurn()
 {
 	Player* currPlayer = NULL;
 	
-	if (this->currentState == Gamestate::player1){currPlayer = &this->p1;}
-	else {currPlayer = &this->p2;}
+	if (currentState == Gamestate::player1){currPlayer = &p1;}
+	else {currPlayer = &p2;}
 
-	Point playerMove = this->makeMove(*currPlayer); // Asking the player to input a move
+	Point playerMove = makeMove(*currPlayer); // Asking the player to input a move
 	while(true)
 	{
 		// Valid move logic.
-		if(this->checkMoveValidity(playerMove))
+		if(checkMoveValidity(playerMove))
 		{
-			this->gb.placePiece(playerMove,*currPlayer);
+			gb.placePiece(playerMove,*currPlayer);
 			break;
 		}
 		else // Invalid move logic.
 		{
 			std::cout << "Invalid move. Please enter a valid move.";
-			playerMove = this->makeMove(*currPlayer);
+			playerMove = makeMove(*currPlayer);
 		}
 	}
 }
