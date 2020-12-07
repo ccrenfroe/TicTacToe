@@ -9,5 +9,5 @@
 Player::Player(char s, std::string n) :	symbol{s},name{n} {}
 
 // Getters
-std::string Player::getName() const{return this->name;}
-char Player::getSymbol() const{return this->symbol;}
+std::string Player::getName() const{return name;}
+char Player::getSymbol() const{return symbol;}
