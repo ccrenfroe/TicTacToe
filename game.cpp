@@ -106,6 +106,8 @@ Point Game::makeMove(const Player& currPlayer) const
 	int row, col;
 	std::cout << currPlayer.getName() << "'s turn.\nPlease enter your move as a row and column choice, seperated by a space. (Ex: 1 2);\n";
 	std::cin >> row >> col;
+	std::cin.clear();
+	std::cin.ignore(10000,'\n');
 	Point playerMove(row,col);
 	return playerMove;
 }
