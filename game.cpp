@@ -83,7 +83,7 @@ void Game::playerTurn()
 	if (this->currentState == Gamestate::player1){currPlayer = &this->p1;}
 	else {currPlayer = &this->p2;}
 
-	Point playerMove = currPlayer->makeMove(); // Asking the player to input a move
+	Point playerMove = this->makeMove(*currPlayer); // Asking the player to input a move
 	while(true)
 	{
 		// Valid move logic.
@@ -95,7 +95,17 @@ void Game::playerTurn()
 		else // Invalid move logic.
 		{
 			std::cout << "Invalid move. Please enter a valid move.";
-			playerMove = currPlayer->makeMove();
+			playerMove = this->makeMove(*currPlayer);
 		}
 	}
+}
+
+// Prompt player to input a move and returns the move as a Point.
+Point Game::makeMove(const Player& currPlayer) const
+{
+	int row, col;
+	std::cout << currPlayer.getName() << "'s turn.\nPlease enter your move as a row and column choice, seperated by a space. (Ex: 1 2);\n";
+	std::cin >> row >> col;
+	Point playerMove(row,col);
+	return playerMove;
 }

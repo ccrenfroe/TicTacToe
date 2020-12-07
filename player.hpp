@@ -19,7 +19,6 @@ class Player
 		Player(char symbol, std::string name); // Constructor
 		std::string getName() const;
 		char getSymbol() const;
-		Point makeMove() const;
 };
 
 #endif

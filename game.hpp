@@ -25,6 +25,7 @@ class Game
 		void updateGameState(); // Updates currentState to help manage the game.
 		bool checkMoveValidity(const Point& sector);
 		void playerTurn();
+		Point makeMove(const Player& currPlaye) const;
 };
 
 #endif
